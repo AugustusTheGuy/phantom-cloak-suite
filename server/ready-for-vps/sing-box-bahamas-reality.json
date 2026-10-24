@@ -1,0 +1,4 @@
+{
+  "log": { "level": "warn" },
+  "inbounds": [ { "type": "vless", "listen": "::", "listen_port": 443, "users": [ { "name": "delphi", "uuid": "REPLACE_UUID" } ], "tls": { "enabled": true, "server_name": "www.microsoft.com", "reality": { "enabled": true, "handshake": { "server": "www.microsoft.com", "server_port": 443 }, "private_key": "REPLACE_KEY", "short_id": [ "bahamas1" ] } } } ], "outbounds": [ { "type": "direct" } ]
+}

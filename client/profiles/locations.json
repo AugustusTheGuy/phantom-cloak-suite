@@ -1,0 +1,98 @@
+{
+  "vancouver": {
+    "display_name": "Vancouver, Canada",
+    "tz": "America/Vancouver",
+    "locale": "en-CA",
+    "expected_geo": "CA",
+    "priority": 1,
+    "recommended_protocol": "stealth"
+  },
+  "dubai": {
+    "display_name": "Dubai, UAE",
+    "tz": "Asia/Dubai",
+    "locale": "ar-AE",
+    "expected_geo": "AE",
+    "priority": 2,
+    "recommended_protocol": "stealth"
+  },
+  "singapore": {
+    "display_name": "Singapore",
+    "tz": "Asia/Singapore",
+    "locale": "en-SG",
+    "expected_geo": "SG",
+    "priority": 3,
+    "recommended_protocol": "stealth"
+  },
+  "zurich": {
+    "display_name": "Zurich, Switzerland",
+    "tz": "Europe/Zurich",
+    "locale": "de-CH",
+    "expected_geo": "CH",
+    "priority": 4,
+    "recommended_protocol": "performance"
+  },
+  "hongkong": {
+    "display_name": "Hong Kong",
+    "tz": "Asia/Hong_Kong",
+    "locale": "zh-HK",
+    "expected_geo": "HK",
+    "priority": 5,
+    "recommended_protocol": "stealth"
+  },
+  "frankfurt": {
+    "display_name": "Frankfurt, Germany",
+    "tz": "Europe/Berlin",
+    "locale": "de-DE",
+    "expected_geo": "DE",
+    "priority": 6,
+    "recommended_protocol": "performance"
+  },
+  "tallinn": {
+    "display_name": "Tallinn, Estonia",
+    "tz": "Europe/Tallinn",
+    "locale": "et-EE",
+    "expected_geo": "EE",
+    "priority": 7,
+    "recommended_protocol": "stealth"
+  },
+  "el_salvador": {
+    "display_name": "San Salvador, El Salvador",
+    "tz": "America/El_Salvador",
+    "locale": "es-SV",
+    "expected_geo": "SV",
+    "priority": 8,
+    "recommended_protocol": "stealth"
+  },
+  "bahamas": {
+    "display_name": "Nassau, Bahamas",
+    "tz": "America/Nassau",
+    "locale": "en-BS",
+    "expected_geo": "BS",
+    "priority": 9,
+    "recommended_protocol": "stealth"
+  },
+  "cayman": {
+    "display_name": "George Town, Cayman Islands",
+    "tz": "America/Cayman",
+    "locale": "en-KY",
+    "expected_geo": "KY",
+    "priority": 10,
+    "recommended_protocol": "stealth"
+  },
+  "mauritius": {
+    "display_name": "Port Louis, Mauritius",
+    "tz": "Indian/Mauritius",
+    "locale": "en-MU",
+    "expected_geo": "MU",
+    "priority": 11,
+    "recommended_protocol": "stealth"
+  },
+  "seychelles": {
+    "display_name": "Victoria, Seychelles",
+    "tz": "Indian/Mahe",
+    "locale": "en-SC",
+    "expected_geo": "SC",
+    "priority": 12,
+    "recommended_protocol": "stealth"
+  }
+}

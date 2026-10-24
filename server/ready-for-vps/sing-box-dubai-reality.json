@@ -1,0 +1,46 @@
+{
+  "log": { "level": "warn" },
+  "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        { "name": "delphi", "uuid": "REPLACE_WITH_GENERATED_UUID" }
+      ],
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "reality": {
+          "enabled": true,
+          "handshake": {
+            "server": "www.microsoft.com",
+            "server_port": 443
+          },
+          "private_key": "REPLACE_WITH_PRIVATE_KEY",
+          "short_id": ["a1b2c3d4"]
+        }
+      },
+      "transport": {
+        "type": "http"
+      }
+    },
+    {
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [
+        { "name": "delphi", "password": "REPLACE_STRONG_PASSWORD" }
+      ],
+      "obfs": { "type": "salamander", "password": "delphi-obfs-dubai" }
+    }
+  ],
+  "outbounds": [
+    { "type": "direct" }
+  ],
+  "route": {
+    "rules": [
+      { "geosite": "cn", "outbound": "block" }
+    ]
+  }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PCS Industrial Command Center v2</title>
+  <link rel="stylesheet" href="pcs_suite_command_center_v2_20260802.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div class="brand-block">
+      <h1>PhantomCloak · Industrial</h1>
+      <p class="sub">Protections active when verified · verify recommended · never “undetectable”</p>
+    </div>
+    <div class="hdr-right">
+      <span class="sec-chip" id="sec-chip" title="Live security score">Security —</span>
+      <span class="live-chip" id="live-chip" title="Status feed">Status offline</span>
+      <div class="tier-pills">
+        <button type="button" class="pill active" id="pill-core">Core</button>
+        <button type="button" class="pill" id="pill-pro">Pro</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mullvad-style large city + flag -->
+  <section class="city-hero card" id="city-hero">
+    <div class="flag" id="hero-flag">🇨🇭</div>
+    <div class="city-wrap">
+      <div class="city-name" id="hero-city">Zurich</div>
+      <div class="city-meta" id="hero-meta">Browsing · CH · previous session</div>
+    </div>
+    <button type="button" class="btn resume" id="btn-resume">Resume Zurich · Browsing</button>
+  </section>
+
+  <section class="hero card">
+    <div class="hero-left">
+      <div class="status-line">
+        <span class="dot" id="dot"></span>
+        <div>
+          <div class="headline" id="headline">Not protected</div>
+          <div class="detail" id="detail">Activate arms kill switch first, then verifies every enabled layer.</div>
+        </div>
+      </div>
+      <div class="metrics">
+        <div class="m"><span class="ml">Tier</span><span class="mv" id="m-tier">Core</span></div>
+        <div class="m"><span class="ml">Price</span><span class="mv" id="m-price">—</span></div>
+        <div class="m"><span class="ml">Obfuscation</span><span class="mv" id="m-obf">—</span></div>
+        <div class="m"><span class="ml">Preflight</span><span class="mv" id="m-gate">—</span></div>
+      </div>
+      <p class="honest-inline">Honest copy: <strong>protections active · verify recommended</strong> — not undetectable.</p>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="btn primary" id="btn-activate">Activate (kill switch auto-on)</button>
+      <button type="button" class="btn danger-ghost" id="btn-tracker-wipe">Hide trackers (confirm)…</button>
+      <button type="button" class="btn ghost" id="btn-audit">Refresh security score</button>
+      <button type="button" class="btn ghost" id="btn-refresh-status">Refresh status</button>
+    </div>
+  </section>
+
+  <!-- Server readiness (live via /api/status) -->
+  <section class="card server-card" id="server-card">
+    <div class="server-head">
+      <h2>Server readiness</h2>
+      <div class="badge-row">
+        <span class="badge" id="server-badge">Scanning…</span>
+        <span class="badge gate" id="protect-badge" title="protect_gate.ok_for_protect">protect —</span>
+      </div>
+    </div>
+    <p class="muted" id="server-summary">Templates vs real VPS IPs · industrial scan</p>
+    <div class="server-stats" id="server-stats">
+      <div class="stat"><span class="stat-n" id="cfg-n">—</span><span class="stat-l">configured</span></div>
+      <div class="stat"><span class="stat-n" id="filled-n">—</span><span class="stat-l">server filled</span></div>
+      <div class="stat"><span class="stat-n" id="pend-n">—</span><span class="stat-l">pending IP</span></div>
+      <div class="stat"><span class="stat-n" id="pool-n">—</span><span class="stat-l">pool real IPs</span></div>
+    </div>
+    <p class="protect-banner warn" id="protect-banner" role="status">
+      Protect blocked while <strong>configured_count = 0</strong> — own VPS IPs required (not catalog).
+    </p>
+    <div class="fp-row">
+      <span class="ml">secrets_fingerprint (public)</span>
+      <code id="secrets-fp" title="Public material fingerprint only — no private keys">—</code>
+    </div>
+    <div class="next-actions" id="next-actions-wrap">
+      <h3 class="section-sub">Next actions</h3>
+      <ol class="action-list" id="next-actions"></ol>
+    </div>
+    <div class="cta-row" id="cta-row">
+      <button type="button" class="btn primary" id="btn-fleet-playbook">CEO Fleet Beginner Playbook…</button>
+      <button type="button" class="btn primary" id="btn-vps-wizard">VPS deploy wizard…</button>
+      <button type="button" class="btn ghost" id="btn-open-inventory">Open inventory path</button>
+      <button type="button" class="btn ghost" id="btn-open-howto">Open HOWTO</button>
+    </div>
+    <p class="path-line muted" id="inventory-path-line">Inventory: —</p>
+    <p class="path-line muted" id="howto-path-line">HOWTO: —</p>
+    <p class="path-line muted" id="playbook-path-line">Playbook: —</p>
+  </section>
+
+  <!-- Fleet: purpose top5 + inventory pool total_real_ips -->
+  <section class="card fleet-card" id="fleet-card">
+    <div class="server-head">
+      <h2>Fleet · purpose top5</h2>
+      <span class="badge" id="fleet-badge">planning</span>
+    </div>
+    <p class="muted" id="fleet-note">Purpose → preferred countries (planning). Exits need owned VPS IPs in inventory.</p>
+    <div class="server-stats fleet-stats">
+      <div class="stat"><span class="stat-n" id="pool-total">—</span><span class="stat-l">total_real_ips</span></div>
+      <div class="stat"><span class="stat-n" id="pool-locs">—</span><span class="stat-l">locations w/ IPs</span></div>
+      <div class="stat"><span class="stat-n" id="mvp-ips">—</span><span class="stat-l">MVP fleet target</span></div>
+      <div class="stat"><span class="stat-n" id="purpose-n">—</span><span class="stat-l">purposes</span></div>
+    </div>
+    <div class="purpose-top5" id="purpose-top5"></div>
+    <p class="honest-inline" id="pool-note">Inventory pool counts owned public IPs only — never scraped residential lists.</p>
+  </section>
+
+  <!-- Residential catalog summary (counts only; not tunnels) -->
+  <section class="card res-card" id="res-card">
+    <div class="server-head">
+      <h2>Residential catalog</h2>
+      <span class="badge" id="res-badge">counts only</span>
+    </div>
+    <p class="muted" id="res-note">Synthetic product catalog — not VPS tunnel endpoints.</p>
+    <div class="server-stats">
+      <div class="stat"><span class="stat-n" id="res-countries">—</span><span class="stat-l">countries on disk</span></div>
+      <div class="stat"><span class="stat-n" id="res-total">—</span><span class="stat-l">catalog entries</span></div>
+      <div class="stat"><span class="stat-n" id="res-catalogued">—</span><span class="stat-l">countries catalogued</span></div>
+    </div>
+    <p class="honest-inline" id="res-honest">Does <strong>not</strong> claim tunnel readiness. Tunnel exits still need inventory + materialize.</p>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Core</h2>
+      <ul class="flist" id="core-list"></ul>
+    </article>
+    <article class="card">
+      <h2>Pro</h2>
+      <ul class="flist" id="pro-list"></ul>
+    </article>
+  </section>
+
+  <!-- Confirm modal -->
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3 id="modal-title">Confirm</h3>
+      <p id="modal-body" class="muted"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="modal-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="modal-ok">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VPS wizard modal -->
+  <div class="modal hidden" id="vps-modal" role="dialog" aria-modal="true">
+    <div class="modal-card modal-wide">
+      <h3>VPS deploy wizard</h3>
+      <ol class="wizard-steps">
+        <li>Scan readiness (this card — live counts above)</li>
+        <li>Edit inventory: <code id="wizard-inv">~/.pcs_industrial_20260802/vps_inventory.json</code></li>
+        <li>Open deploy HOWTO (Suite docs read-only + industrial link)</li>
+        <li>Run materialize → write clients under <code>~/.pcs_industrial_20260802/singbox/</code></li>
+        <li>Re-scan until <strong>configured_count</strong> &gt; 0 and protect gate is OK</li>
+      </ol>
+      <p class="muted">Guide: <code id="howto-path">docs_v20260802/HOWTO_DEPLOY_LINK_v20260802.md</code></p>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="vps-close">Close</button>
+        <button type="button" class="btn ghost" id="vps-copy-inv">Copy inventory path</button>
+        <button type="button" class="btn primary" id="vps-open-docs">Open HOWTO paths</button>
+      </div>
+    </div>
+  </div>
+
+  <pre class="log card" id="log">Ready. Industrial tree only — originals not modified.</pre>
+  <script src="pcs_suite_command_center_v2_20260802.js"></script>
+</body>
+</html>

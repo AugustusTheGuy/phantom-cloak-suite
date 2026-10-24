@@ -1,0 +1,55 @@
+# PCS Industrial — never commit secrets, local state, or generated packages
+# Runtime state lives outside this tree: ~/.pcs_industrial_20260802/
+# See docs_v20260802/SECURITY_SECRETS_v20260802.md
+
+# --- local / OS ---
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# --- secrets & credentials (defense in depth; prefer never create under this tree) ---
+**/*secret*
+**/*secrets*
+**/location_keys.json
+**/*.pem
+**/*.key
+**/privkey*
+**/*private_key*
+**/*hy2_password*
+**/.env
+**/.env.*
+!.env.example
+**/API_KEYS*
+**/credentials*
+**/*credentials*
+
+# --- generated VPN material (if ever copied into tree) ---
+**/vps_server_package/**
+!server_vps_package_v20260802/templates_source_copy/
+!server_vps_package_v20260802/templates_source_copy/**
+**/*.pending.json
+**/singbox/*.json
+**/hy2_certs/**
+**/materialize_meta.json
+**/vps_inventory.json
+**/last_session_industrial.json
+**/killswitch_industrial.log
+
+# --- accounts / payments local state ---
+**/accounts/**
+**/payments/orders*
+**/pf_rules/**
+
+# --- accidental state dir dump ---
+.pcs_industrial_*/
+**/.pcs_industrial_*/

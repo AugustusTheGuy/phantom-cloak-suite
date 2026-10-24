@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PCS Industrial — Command Center</title>
+  <link rel="stylesheet" href="pcs_suite_command_center_v20260802.css" />
+</head>
+<body>
+  <header class="hdr">
+    <div>
+      <h1>PhantomCloak Suite</h1>
+      <p class="sub">Industrial build 20260802 · Core &amp; Pro · originals not modified</p>
+    </div>
+    <div class="tier-pills">
+      <button type="button" class="pill active" data-tier="core" id="pill-core">Core</button>
+      <button type="button" class="pill" data-tier="pro" id="pill-pro">Pro</button>
+    </div>
+  </header>
+
+  <section class="hero card">
+    <div class="hero-left">
+      <div class="status-line">
+        <span class="dot" id="dot"></span>
+        <div>
+          <div class="headline" id="headline">Not protected</div>
+          <div class="detail" id="detail">Run preflight before any outbound protected session.</div>
+        </div>
+      </div>
+      <div class="metrics">
+        <div class="m"><span class="ml">Tier</span><span class="mv" id="m-tier">Core</span></div>
+        <div class="m"><span class="ml">Price</span><span class="mv" id="m-price">—</span></div>
+        <div class="m"><span class="ml">Obfuscation</span><span class="mv" id="m-obf">—</span></div>
+        <div class="m"><span class="ml">Preflight</span><span class="mv" id="m-gate">—</span></div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <button type="button" class="btn primary" id="btn-activate">Activate (preflight + killswitch)</button>
+      <button type="button" class="btn ghost" id="btn-audit">Show security notes</button>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Core — personal privacy</h2>
+      <p>All major personal-VPN class protections + zero-leak preflight + on-device tracker vault (hide / restore on request).</p>
+      <ul id="core-list" class="flist"></ul>
+    </article>
+    <article class="card">
+      <h2>Pro — teams &amp; multi-profile</h2>
+      <p>Core plus RBAC, audit, residential pool config, multi-hop, industrial automation scaffolds.</p>
+      <ul id="pro-list" class="flist"></ul>
+    </article>
+  </section>
+
+  <section class="card honest">
+    <h2>Honest claims (FTC)</h2>
+    <p>PCS verifies enabled layers and fails closed with killswitch. It does <strong>not</strong> claim absolute impossibility of all leaks (OS bugs, hardware side-channels, user misconfiguration).</p>
+  </section>
+
+  <pre class="log card" id="log">Ready.</pre>
+  <script src="pcs_suite_command_center_v20260802.js"></script>
+</body>
+</html>

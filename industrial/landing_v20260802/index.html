@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PhantomCloak — Privacy that proves itself</title>
+<meta name="description" content="On-device VPN & privacy. Verified-before-send kill switch. Core $4.99/mo annual. Pro $39/mo founder. XMR BTC ETH SOL and cards." />
+<style>
+  :root{
+    --bg:#0B0B12; --surface:#151521; --surface-2:#1c1c2b; --line:#26263A;
+    --purple:#8B5CF6; --purple-lt:#B79CFF; --green:#22C55E; --red:#FF4D4D;
+    --text:#EDECF7; --muted:#9A98B5; --radius:16px;
+    --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,monospace;
+    --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--ui);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--purple-lt);box-shadow:0 0 14px var(--purple-lt);animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .btn{display:inline-block;background:var(--purple);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;border:none;cursor:pointer}
+  .btn:hover{background:#7a4ff0}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .btn:disabled{opacity:.5;cursor:not-allowed}
+  .hero{text-align:center;padding:64px 0 40px}
+  .eyebrow{color:var(--purple-lt);font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:16px 0;font-weight:800}
+  .sub{color:var(--muted);font-size:19px;max-width:640px;margin:0 auto 28px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .wedges{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:48px 0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .card h3{display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:10px}
+  .card p{color:var(--muted)}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--green)}
+  .section-title{text-align:center;margin:56px 0 8px;font-size:30px;font-weight:800}
+  .section-note{text-align:center;color:var(--muted);margin-bottom:28px}
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
+  .plan.pro{border-color:var(--purple)}
+  .plan h4{font-size:15px;font-family:var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--purple-lt)}
+  .price{font-size:40px;font-weight:800;margin:10px 0 2px}
+  .price small{font-size:15px;color:var(--muted);font-weight:500}
+  .plan ul{list-style:none;margin:18px 0;flex:1}
+  .plan li{padding:7px 0;display:flex;gap:10px}
+  .plan li::before{content:"✓";color:var(--green);font-weight:700}
+  .plan li.pro-only::before{content:"★";color:var(--purple-lt)}
+  .paybox{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+  .paybox label{display:block;font-size:12px;color:var(--muted);margin:8px 0 4px;font-family:var(--mono)}
+  select,input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--text)}
+  .out{margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--purple-lt);white-space:pre-wrap;word-break:break-all}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:8px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+  th{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  td.c{text-align:center}
+  .yes{color:var(--green)}.no{color:#55546b}
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  footer{color:var(--muted);font-size:13px;text-align:center;padding:56px 0 40px;border-top:1px solid var(--line);margin-top:64px}
+  .fine{max-width:760px;margin:14px auto 0;font-size:12px;line-height:1.6}
+  @media(max-width:760px){.wedges,.plans,.trust{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <div class="brand"><span class="dot"></span> PhantomCloak</div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span style="font-size:12px;color:var(--muted);font-family:var(--mono)">protections active · verify recommended</span>
+      <a class="btn ghost" href="#pricing">See plans</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">On-device VPN &amp; privacy</div>
+    <h1>Privacy that proves itself.</h1>
+    <p class="sub">Most VPNs ask you to trust a promise. PhantomCloak verifies every protection is live <em>before</em> a single byte leaves your device — and blocks the connection the instant one fails.</p>
+    <div class="cta-row">
+      <a class="btn" href="#pricing">Choose your plan</a>
+      <a class="btn ghost" href="#how">How it works</a>
+    </div>
+  </header>
+
+  <section class="wedges" id="how">
+    <div class="card">
+      <h3><span class="dot" style="background:var(--green);box-shadow:0 0 14px var(--green)"></span> Zero-Leak Verified</h3>
+      <p>A kill switch is only useful if it fires. We run on-device preflight of tunnel, DNS, and enabled layers. If any required check fails, traffic stops — fail-closed by design.</p>
+      <p class="tag">// verified before every transmission</p>
+    </div>
+    <div class="card">
+      <h3>💸 Honest billing</h3>
+      <p>Price you see is the price charged. Crypto (XMR, BTC, ETH, SOL) or card. Access codes mint only after payment confirmation — not before.</p>
+      <p class="tag">// no dark patterns</p>
+    </div>
+  </section>
+
+  <h2 class="section-title" id="pricing">Two plans. Pick your fit.</h2>
+  <p class="section-note">Pricing from product report · Core annual $4.99/mo · Pro founder $39/mo</p>
+  <div class="plans">
+    <div class="plan" id="plan-core">
+      <h4>PhantomCloak Core</h4>
+      <div class="price">$4.99<small> /mo, billed yearly ($59.88)</small></div>
+      <div class="section-note" style="text-align:left;margin:0">$11.99 month-to-month</div>
+      <ul>
+        <li>Verified-before-send kill switch (auto-on with Activate)</li>
+        <li>DNS / IPv6 / WebRTC leak protection</li>
+        <li>On-device tracker vault (hide / restore on request)</li>
+        <li>Ad / tracker / malware DNS blocklists</li>
+        <li>Obfuscation auto-select (REALITY / QUIC / …)</li>
+        <li>Purpose profiles · honest no-logs architecture</li>
+        <li><em class="tag">Live / config only — no overclaim</em></li>
+      </ul>
+      <div class="paybox">
+        <label>Term</label>
+        <select id="core-term"><option value="annual">Annual $59.88</option><option value="monthly">Monthly $11.99</option></select>
+        <label>Pay with</label>
+        <select id="core-asset">
+          <option value="BTC">Bitcoin</option>
+          <option value="XMR">Monero</option>
+          <option value="ETH">Ethereum</option>
+          <option value="SOL">Solana</option>
+          <option value="CARD">Credit / Debit Card</option>
+        </select>
+        <button class="btn" style="width:100%;margin-top:12px" onclick="checkout('core')">Start with Core</button>
+        <div class="out" id="core-out"></div>
+      </div>
+    </div>
+    <div class="plan pro" id="plan-pro">
+      <h4>PhantomCloak Pro</h4>
+      <div class="price">$39<small> /mo founder</small></div>
+      <div class="section-note" style="text-align:left;margin:0">$29/mo billed yearly ($348) · Core + pro layer</div>
+      <ul>
+        <li>Everything in Core</li>
+        <li class="pro-only">Team seats &amp; RBAC workspaces (live)</li>
+        <li class="pro-only">Exportable audit log (live)</li>
+        <li class="pro-only">Multi-hop / obfuscation / residential pool (config → server)</li>
+        <li class="pro-only">Always-on zero-leak watchdog</li>
+        <li class="pro-only">Roadmap items labeled — never sold as live until built</li>
+      </ul>
+      <div class="paybox">
+        <label>Term</label>
+        <select id="pro-term"><option value="monthly">Monthly $39</option><option value="annual">Annual $348 ($29/mo)</option></select>
+        <label>Pay with</label>
+        <select id="pro-asset">
+          <option value="BTC">Bitcoin</option>
+          <option value="XMR">Monero</option>
+          <option value="ETH">Ethereum</option>
+          <option value="SOL">Solana</option>
+          <option value="CARD">Credit / Debit Card</option>
+        </select>
+        <button class="btn" style="width:100%;margin-top:12px" onclick="checkout('pro')">Start with Pro</button>
+        <div class="out" id="pro-out"></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Full comparison</h2>
+  <p class="section-note">What is live vs roadmap is called out honestly (FTC).</p>
+  <table>
+    <tr><th>Capability</th><th class="c">Core</th><th class="c">Pro</th></tr>
+    <tr><td>Verified-before-send kill switch</td><td class="c yes">✓ live</td><td class="c yes">✓ live</td></tr>
+    <tr><td>Leak protection DNS/IPv6/WebRTC</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Tracker vault hide/restore</td><td class="c yes">✓ live</td><td class="c yes">✓ live</td></tr>
+    <tr><td>DNS blocklists</td><td class="c yes">✓ live</td><td class="c yes">✓ live</td></tr>
+    <tr><td>RBAC / team workspaces</td><td class="c no">—</td><td class="c yes">✓ live</td></tr>
+    <tr><td>Multi-hop / residential IP</td><td class="c no">—</td><td class="c yes">config/infra</td></tr>
+  </table>
+
+  <h2 class="section-title">Built to be trusted</h2>
+  <div class="trust">
+    <div class="card"><h3>On your device</h3><p>Preflight and obfuscation selection run locally. We do not claim absolute impossibility of all leaks.</p></div>
+    <div class="card"><h3>Open to audit</h3><p>Industrial security audit + /security_audit workflow. No fake audit badges.</p></div>
+    <div class="card"><h3>Plain-language policy</h3><p>Not for fraud, KYC evasion, or unlawful activity. Personal privacy and legitimate team isolation only.</p></div>
+  </div>
+
+  <footer>
+    <div class="brand" style="justify-content:center"><span class="dot"></span> PhantomCloak</div>
+    <p class="fine">“Verified-before-send” blocks transmission when a required protection check fails; no software guarantees data can never leak under all OS/hardware conditions. Pricing per product report; subject to change before live checkout. Card needs STRIPE_SECRET_KEY; crypto needs wallet env + processor for production confirmations. Demo confirm available only on local industrial server.</p>
+  </footer>
+</div>
+<script>
+async function checkout(tier) {
+  const term = document.getElementById(tier + '-term').value;
+  const asset = document.getElementById(tier + '-asset').value;
+  const out = document.getElementById(tier + '-out');
+  out.textContent = 'Creating order…';
+  try {
+    const r = await fetch('/api/create_order', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({tier, term, asset})
+    });
+    const j = await r.json();
+    if (j.error) { out.textContent = j.error; return; }
+    let msg = `Order ${j.order_id}\n$${j.amount_usd} ${j.asset}\n${j.instructions}\n`;
+    if (j.payment_target && j.asset !== 'CARD') msg += `Target: ${j.payment_target}\nTag: ${j.payment_tag}\n`;
+    if (j.client_secret) msg += `Stripe client_secret: ${j.client_secret}\n`;
+    msg += '\nDemo local only: POST /api/confirm_demo {"order_id":"…"} to mint access code after test pay.';
+    out.textContent = msg;
+  } catch (e) {
+    out.textContent = 'Checkout API offline. Start: python core_product/pcs_app_shell_v20260802.py --serve-payments 8787\n' + e;
+  }
+}
+</script>
+</body>
+</html>

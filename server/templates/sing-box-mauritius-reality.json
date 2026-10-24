@@ -1,0 +1,1 @@
+{"log":{"level":"warn"},"inbounds":[{"type":"vless","listen":"::","listen_port":443,"users":[{"name":"delphi","uuid":"REPLACE_UUID"}],"tls":{"enabled":true,"server_name":"www.google.com","reality":{"enabled":true,"handshake":{"server":"www.google.com","server_port":443},"private_key":"REPLACE_KEY","short_id":["mauritius1"]}}}],"outbounds":[{"type":"direct"}]}

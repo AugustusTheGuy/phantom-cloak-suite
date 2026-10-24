@@ -1,0 +1,42 @@
+/* PhantomCloak Suite — tier gating + entitlement lock (additive) */
+
+/* Core hides/locks Pro-only controls. Tag any Pro control with class
+   "pro-only" or attribute data-pro. Harmless until controls are tagged. */
+body[data-tier="core"] .pro-only,
+body[data-tier="core"] [data-pro]{
+  opacity:.4; pointer-events:none; position:relative;
+}
+body[data-tier="core"] .pro-only::after,
+body[data-tier="core"] [data-pro]::after{
+  content:"PRO"; position:absolute; top:50%; right:10px; transform:translateY(-50%);
+  font:10px/1 ui-monospace,'SF Mono',monospace; letter-spacing:1px;
+  color:#B79CFF; border:1px solid #3a2f66; border-radius:6px;
+  padding:2px 5px; background:#1c1630;
+}
+
+/* Entitlement lock overlay */
+#pc-entitlement-lock{
+  position:fixed; inset:0; z-index:99999; display:flex;
+  align-items:center; justify-content:center;
+  background:rgba(8,8,14,.86); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;
+}
+.pc-lock-card{
+  width:min(420px,90vw); background:#151521; border:1px solid #26263A;
+  border-radius:18px; padding:34px 30px; text-align:center; color:#EDECF7;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.pc-lock-dot{
+  width:14px; height:14px; border-radius:50%; margin:0 auto 14px;
+  background:#FF4D4D; box-shadow:0 0 16px #FF4D4D; animation:pcpulse 1.5s ease-in-out infinite;
+}
+@keyframes pcpulse{0%,100%{opacity:.5}50%{opacity:1}}
+.pc-lock-card h2{font-size:22px;margin:0 0 8px}
+.pc-lock-card p{color:#9A98B5;font-size:15px;margin:0 0 18px;line-height:1.5}
+.pc-lock-actions{display:flex;gap:10px;justify-content:center}
+.pc-lock-btn{
+  padding:11px 18px; border-radius:11px; border:1px solid #26263A;
+  background:transparent; color:#EDECF7; font-weight:600; cursor:pointer;
+}
+.pc-lock-btn.primary{background:#8B5CF6;border-color:#8B5CF6;color:#fff}
+.pc-lock-note{font-size:12px;color:#6f6d88;margin-top:16px}

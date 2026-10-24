@@ -1,0 +1,26 @@
+country,slot,ip,ssh_user,product_key,notes
+DE,1,,root,germany,MVP first-25 — paste OWNED public IPv4 only
+DE,2,,root,germany,
+DE,3,,root,germany,
+DE,4,,root,germany,
+DE,5,,root,germany,
+CA,1,,root,vancouver,MVP first-25 Canada
+CA,2,,root,vancouver,
+CA,3,,root,vancouver,
+CA,4,,root,vancouver,
+CA,5,,root,vancouver,
+US,1,,root,us,MVP first-25 United States
+US,2,,root,us,
+US,3,,root,us,
+US,4,,root,us,
+US,5,,root,us,
+GB,1,,root,gb,MVP first-25 United Kingdom
+GB,2,,root,gb,
+GB,3,,root,gb,
+GB,4,,root,gb,
+GB,5,,root,gb,
+AE,1,,root,dubai,MVP first-25 UAE Dubai
+AE,2,,root,dubai,
+AE,3,,root,dubai,
+AE,4,,root,dubai,
+AE,5,,root,dubai,

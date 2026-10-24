@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhantomCloak</title>
+  <link rel="icon" type="image/png" href="ghost-icon.png">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="tier_gate.css">
+</head>
+<body>
+  <!-- LIQUID BACKGROUND -->
+  <div class="liquid-bg" aria-hidden="true">
+    <div class="liquid-blob liquid-blob-1"></div>
+    <div class="liquid-blob liquid-blob-2"></div>
+    <div class="liquid-blob liquid-blob-3"></div>
+    <div class="liquid-blob liquid-blob-4"></div>
+  </div>
+
+  <!-- SPLASH / LOADING -->
+  <div id="splash-screen">
+    <div class="splash-center">
+      <div class="splash-ghost-container">
+        <img src="ghost-icon.png" alt="PhantomCloak" class="splash-ghost-img" width="140" height="140">
+        <svg class="splash-wifi" viewBox="0 0 32 32" aria-hidden="true">
+          <path class="wifi-bar bar-3" d="M6 22 Q16 8 26 22"/>
+          <path class="wifi-bar bar-2" d="M10 22 Q16 14 22 22"/>
+          <path class="wifi-bar bar-1" d="M14 22 Q16 18 18 22"/>
+          <circle class="wifi-dot" cx="16" cy="24" r="1.8"/>
+        </svg>
+      </div>
+      <p class="splash-label">PhantomCloak</p>
+      <p class="splash-sub" id="splash-status">Initializing secure tunnel…</p>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app-root" class="hidden">
+    <div class="app">
+      <div id="main-page">
+        <header class="header">
+          <div class="brand">
+            <h1><img src="ghost-icon.png" alt="" class="brand-ghost" width="40" height="40"> PhantomCloak</h1>
+            <p>Command Center · Privacy &amp; location protections</p>
+          </div>
+          <div class="settings-bar">
+            <div class="lang-wrap">
+              <label for="lang-select" class="lang-label">Broadcast</label>
+              <select id="lang-select" class="lang-select" onchange="setBroadcastLanguage(this.value)">
+                <option value="en">English</option>
+              </select>
+            </div>
+            <div class="dropdown-wrap">
+              <button class="dropdown-btn" onclick="toggleDropdown('quick-settings')">More ▾</button>
+              <div class="dropdown-menu" id="quick-settings">
+                <div class="dropdown-item pro-only" onclick="enableOnion()">Enable Double Onion</div>
+                <div class="dropdown-item pro-only" onclick="disableOnion()">Disable Double Onion</div>
+                <div class="dropdown-item" onclick="runSecurityAudit()">Security Audit</div>
+                <div class="dropdown-item" onclick="api()?.run_verify()">Zero-Leak Verification</div>
+                <div class="dropdown-item" onclick="api()?.safe_reconnect()">Safe Reconnect</div>
+                <div class="dropdown-item" onclick="showContentPage()">Quick Connect Services</div>
+                <div class="dropdown-item" onclick="openCheckout()">Subscribe / Redeem code</div>
+              </div>
+            </div>
+            <span class="badge badge-purple">Local-only</span>
+            <span class="badge badge-green" id="live-badge">STANDBY</span>
+          </div>
+        </header>
+
+        <!-- Command Center: one primary story (Connect / Protect / Location) like top VPN UIs -->
+        <section class="command-center glass-card" id="command-center" aria-label="Connection command center">
+          <div class="cc-left">
+            <div class="cc-status-row">
+              <span class="cc-dot" id="cc-dot" aria-hidden="true"></span>
+              <div>
+                <div class="cc-headline" id="cc-headline">Not protected</div>
+                <div class="cc-sub" id="cc-sub">Choose Activate to pick a purpose and location, then arm protections.</div>
+              </div>
+            </div>
+            <div class="cc-metrics" id="cc-metrics">
+              <div class="cc-metric"><span class="cc-metric-label">Location</span><span class="cc-metric-value" id="cc-location">—</span></div>
+              <div class="cc-metric"><span class="cc-metric-label">Purpose</span><span class="cc-metric-value" id="cc-purpose">—</span></div>
+              <div class="cc-metric"><span class="cc-metric-label">Kill switch</span><span class="cc-metric-value" id="cc-kill">Off</span></div>
+              <div class="cc-metric"><span class="cc-metric-label">Security</span><span class="cc-metric-value" id="cc-sec">—</span></div>
+            </div>
+          </div>
+          <div class="cc-actions">
+            <button type="button" class="btn btn-primary btn-lg" id="cc-primary" onclick="openWizard()">
+              Activate protection
+            </button>
+            <button type="button" class="btn btn-ghost btn-lg" id="cc-secondary" onclick="deactivate()">
+              Turn off &amp; restore
+            </button>
+            <button type="button" class="btn btn-ghost" onclick="runSecurityAudit(); runHealthHarness();">
+              Health + Security Audit
+            </button>
+          </div>
+        </section>
+
+        <p class="onboarding-tip" id="onboarding-tip">
+          <strong>How to use:</strong> 1) Activate protection · 2) Confirm kill switch stays On while protected ·
+          3) Open Content Platform for Camoufox · 4) Turn off &amp; restore when finished.
+        </p>
+
+        <div class="content-access-window glass-card" id="content-access-window">
+          <div class="content-access-left">
+            <img src="ghost-icon.png" alt="" class="content-access-ghost" width="64" height="64">
+            <div class="content-access-info">
+              <h2>Content Platform</h2>
+              <p id="content-access-desc">Quick-connect to streaming, crypto, browsing &amp; nomad services through Camoufox while protections stay active.</p>
+              <div class="content-access-meta" id="content-access-meta">
+                <span class="badge badge-purple" id="content-access-purpose">Purpose: —</span>
+                <span class="badge badge-green hidden" id="content-access-count">0 services</span>
+              </div>
+            </div>
+          </div>
+          <div class="content-access-right">
+            <div class="content-access-status" id="content-access-status">
+              <span class="content-access-lock">Locked</span>
+              <span>Activate PhantomCloak to unlock</span>
+            </div>
+            <button class="btn btn-primary content-access-btn" id="btn-open-content" onclick="showContentPage()" disabled>
+              Enter Content Platform →
+            </button>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <aside>
+            <div class="grade-panel glass-card" id="grade-content">
+              <div class="grade-empty">Activate to grade protections</div>
+            </div>
+            <div class="health-panel glass-card" id="health-panel">
+              <div class="health-header">
+                <span class="health-title" id="health-count">Cloaking Techniques</span>
+                <span class="health-overall badge badge-purple" id="health-overall">STANDBY</span>
+              </div>
+              <div class="health-summary" id="health-summary">Run harness to evaluate techniques…</div>
+              <div class="health-list" id="health-list"></div>
+              <button class="btn btn-primary btn-sm heal-all-btn" id="heal-all-btn" onclick="healAll()">Heal ALL ⊕</button>
+              <button class="btn btn-ghost btn-sm health-run-btn" onclick="runHealthHarness()">Run Harness</button>
+            </div>
+            <div class="audit-panel glass-card hidden" id="audit-panel"></div>
+          </aside>
+
+          <section class="main-controls">
+            <div class="status-panel glass-card" id="status-content">
+              <div><span class="label">STATUS:</span> <span class="val-purple">INITIALIZING…</span></div>
+            </div>
+            <div class="main-toggle glass-card" id="toggle-phantomcloak">
+              <div>
+                <div class="title state-purple" id="pc-title">PhantomCloak: STANDBY</div>
+                <div class="sub">Tap ghost to activate · Red ghost to deactivate &amp; restore</div>
+              </div>
+              <button class="ghost-btn on-purple" id="btn-activate" onclick="openWizard()" title="Activate" aria-label="Activate"></button>
+              <button class="ghost-btn" id="btn-deactivate" onclick="deactivate()" title="Deactivate" aria-label="Deactivate"></button>
+            </div>
+
+            <div class="main-toggle glass-card">
+              <div>
+                <div class="title state-purple">Hide Google Accounts / Trackers</div>
+                <div class="sub" id="google-status"></div>
+              </div>
+              <button class="ghost-btn g-dim" id="gh-google-on" onclick="hideGoogle()" title="Hide"><img src="ghost-icon.png" alt=""></button>
+              <button class="ghost-btn r-dim" id="gh-google-off" onclick="restoreGoogle()" title="Restore"><img src="ghost-icon.png" alt="" style="opacity:0.5"></button>
+            </div>
+
+            <div class="main-toggle glass-card">
+              <div>
+                <div class="title state-purple">Hide All Trackers / Data</div>
+                <div class="sub">Cookies, cache, fingerprints → encrypted vault</div>
+              </div>
+              <button class="ghost-btn g-dim" id="gh-all-on" onclick="hideAll()" title="Hide"><img src="ghost-icon.png" alt=""></button>
+              <button class="ghost-btn r-dim" id="gh-all-off" onclick="api()?.restore_all_trackers(); refreshStatus()" title="Restore"><img src="ghost-icon.png" alt="" style="opacity:0.5"></button>
+            </div>
+            <div class="main-toggle glass-card" onclick="restoreGoogle()">
+              <div>
+                <div class="title state-purple">Restore Google / YouTube User Data</div>
+                <div class="sub">Re-apply cloned account data exactly as before</div>
+              </div>
+              <button class="ghost-btn" title="Restore"><img src="ghost-icon.png" alt=""></button>
+            </div>
+
+            <div class="main-toggle glass-card" onclick="toggleKillswitch()">
+              <div>
+                <div class="title state-red" id="killswitch-label">pf Killswitch: DISARMED</div>
+                <div class="sub">Blocks all non-tunnel traffic when armed</div>
+              </div>
+              <button class="ghost-btn on-red" title="Toggle"><img src="ghost-icon.png" alt=""></button>
+            </div>
+
+            <div class="main-toggle glass-card">
+              <div>
+                <div class="title state-green" id="lan-label">Local Network Access: ON</div>
+                <div class="sub">Lets AirPlay, casting, screen-mirroring &amp; Bonjour reach LAN devices — internet stays tunneled <span id="lan-reach" class="lan-reach">checking…</span></div>
+              </div>
+              <label class="lan-switch" title="Local Network Access">
+                <input type="checkbox" id="lan-toggle" checked onchange="setLocalNetwork(this.checked)">
+                <span class="lan-slider"></span>
+              </label>
+            </div>
+
+
+
+            <div class="active-bar glass-card" id="active-bar">
+              <span class="badge badge-green">PROTECTED</span>
+              <button class="btn btn-primary btn-sm" onclick="showContentPage()">Quick Connect →</button>
+              <div class="country-switch">
+                <label style="font-size:0.76rem;color:var(--muted)">Country</label>
+                <select id="country-quick" onchange="api()?.switch_location(this.value); refreshStatus()">
+                  <option value="CA">Canada</option>
+                  <option value="AE">UAE</option>
+                  <option value="SG">Singapore</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="DE">Germany</option>
+                  <option value="HK">Hong Kong</option>
+                </select>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="content-page" class="hidden">
+        <div class="content-header">
+          <button class="back-btn glass-card" onclick="showMainPage()" title="Back" aria-label="Back">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="content-title-wrap">
+            <h2><img src="ghost-icon.png" alt="" class="content-ghost" width="28" height="28"> <span id="content-title-text">Quick Connect</span></h2>
+            <p id="content-subtitle">Protected browsing via Camoufox</p>
+          </div>
+          <span class="badge badge-green">PROTECTED</span>
+        </div>
+        <aside class="content-status-mini glass-card" id="content-status-mini"></aside>
+        <div id="content-sections"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVATION WIZARD -->
+  <div class="modal-overlay" id="wizard-modal">
+    <div class="modal glass-card">
+      <h2><img src="ghost-icon.png" alt="" class="modal-ghost" width="28" height="28"> Activate PhantomCloak</h2>
+      <div class="step-label" id="wizard-step-label">Step 1 of 4</div>
+      <div id="wizard-body"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost hidden" id="wizard-back" onclick="showWizardStep(state.wizardStep - 1)">Back</button>
+        <button class="btn btn-ghost" onclick="closeWizard()">Cancel</button>
+        <button class="btn btn-primary" id="wizard-next">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCOUNT HUB -->
+  <div class="modal-overlay" id="account-hub-modal">
+    <div class="modal glass-card">
+      <div class="account-hub-header">
+        <h2><img src="ghost-icon.png" alt="" class="modal-ghost" width="28" height="28"> Accounts</h2>
+        <button class="btn btn-ghost btn-sm" onclick="closeAccountHub()">Close</button>
+      </div>
+      <button class="btn btn-primary create-account-btn" onclick="startCreateAccount()">
+        + Create Account
+      </button>
+      <div class="account-list" id="account-list">
+        <p style="color:var(--muted);font-size:0.82rem;padding:12px">Loading accounts…</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE ACCOUNT WIZARD -->
+  <div class="modal-overlay" id="create-account-modal">
+    <div class="modal glass-card">
+      <h2><img src="ghost-icon.png" alt="" class="modal-ghost" width="28" height="28"> Create Account</h2>
+      <div class="step-label" id="create-step-label">Step 1 of 4</div>
+      <div id="create-body"></div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost hidden" id="create-back" onclick="showCreateStep(state.createStep - 1)">Back</button>
+        <button class="btn btn-ghost" onclick="closeCreateAccount()">Cancel</button>
+        <button class="btn btn-primary" id="create-next">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal modal-sm glass-card">
+      <h2><img src="ghost-icon.png" alt="" class="modal-ghost" width="24" height="24"> Sign In</h2>
+      <form class="login-form" onsubmit="submitLogin(event)">
+        <label for="login-account">Account</label>
+        <input class="input-field" id="login-account" type="text" readonly>
+        <label for="login-password">Password</label>
+        <input class="input-field" id="login-password" type="password" placeholder="Enter password" autocomplete="current-password">
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" onclick="closeLogin()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Sign In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUBSCRIBE / CHECKOUT -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal glass-card">
+      <div class="account-hub-header">
+        <h2><img src="ghost-icon.png" alt="" class="modal-ghost" width="28" height="28"> Subscribe · Crypto-first</h2>
+        <button class="btn btn-ghost btn-sm" onclick="closeCheckout()">Close</button>
+      </div>
+      <div id="checkout-body"></div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+  <script src="tier_gate.js"></script>
+</body>
+</html>

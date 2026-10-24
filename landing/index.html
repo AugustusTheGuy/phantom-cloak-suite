@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PhantomCloak — Privacy that proves itself</title>
+<style>
+  :root{
+    --bg:#0B0B12; --surface:#151521; --surface-2:#1c1c2b; --line:#26263A;
+    --purple:#8B5CF6; --purple-lt:#B79CFF; --green:#22C55E; --red:#FF4D4D;
+    --text:#EDECF7; --muted:#9A98B5; --radius:16px;
+    --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,monospace;
+    --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--ui);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--purple-lt);box-shadow:0 0 14px var(--purple-lt);animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+  .btn{display:inline-block;background:var(--purple);color:#fff;font-weight:600;padding:12px 22px;border-radius:12px;transition:.15s;border:none;cursor:pointer}
+  .btn:hover{background:#7a4ff0}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+  .hero{text-align:center;padding:64px 0 40px}
+  .eyebrow{color:var(--purple-lt);font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+  h1{font-size:clamp(34px,6vw,58px);line-height:1.05;margin:16px 0;font-weight:800}
+  .sub{color:var(--muted);font-size:19px;max-width:620px;margin:0 auto 28px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .wedges{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:48px 0}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .card h3{display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:10px}
+  .card p{color:var(--muted)}
+  .tag{font-family:var(--mono);font-size:12px;color:var(--green)}
+  .section-title{text-align:center;margin:56px 0 8px;font-size:30px;font-weight:800}
+  .section-note{text-align:center;color:var(--muted);margin-bottom:28px}
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
+  .plan.pro{border-color:var(--purple)}
+  .plan h4{font-size:15px;font-family:var(--mono);letter-spacing:1px;text-transform:uppercase;color:var(--purple-lt)}
+  .price{font-size:40px;font-weight:800;margin:10px 0 2px}
+  .price small{font-size:15px;color:var(--muted);font-weight:500}
+  .plan ul{list-style:none;margin:18px 0;flex:1}
+  .plan li{padding:7px 0;color:var(--text);display:flex;gap:10px;align-items:flex-start}
+  .plan li::before{content:"✓";color:var(--green);font-weight:700}
+  .plan li.pro-only::before{content:"★";color:var(--purple-lt)}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:8px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-size:14px}
+  th{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  td.c{text-align:center}
+  .yes{color:var(--green)}.no{color:#55546b}
+  .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  .trust .card p{font-size:14px}
+  footer{color:var(--muted);font-size:13px;text-align:center;padding:56px 0 40px;border-top:1px solid var(--line);margin-top:64px}
+  .fine{max-width:760px;margin:14px auto 0;font-size:12px;line-height:1.6}
+  @media(max-width:760px){.wedges,.plans,.trust{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <div class="brand"><span class="dot"></span> PhantomCloak</div>
+    <div><a class="btn ghost" href="#pricing">See plans</a></div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">On-device VPN &amp; privacy</div>
+    <h1>Privacy that proves itself.</h1>
+    <p class="sub">Most VPNs ask you to trust a promise. PhantomCloak verifies every protection is live <em>before</em> a single byte leaves your device — and blocks the connection the instant one fails.</p>
+    <div class="cta-row">
+      <a class="btn" href="#pricing">Choose your plan</a>
+      <a class="btn ghost" href="#how">How it works</a>
+    </div>
+  </header>
+
+  <section class="wedges" id="how">
+    <div class="card">
+      <h3><span class="dot" style="background:var(--green);box-shadow:0 0 14px var(--green)"></span> Zero-Leak Verified</h3>
+      <p>A kill switch is only useful if it actually fires. PhantomCloak runs a continuous, on-device check of your tunnel, DNS, and leak protection, and shows you a live “verified” status. If any check fails, traffic stops — fail-closed by design.</p>
+      <p class="tag">// verified before every transmission</p>
+    </div>
+    <div class="card">
+      <h3>💸 Honest billing</h3>
+      <p>No renewal traps. The price you see is the price you’re charged, we email you <em>before</em> every renewal, and you can cancel in one click. No dark patterns, no buried terms.</p>
+      <p class="tag">// reminder before we ever charge you</p>
+    </div>
+  </section>
+
+  <h2 class="section-title" id="pricing">Two plans. Pick your fit.</h2>
+  <p class="section-note">Everyday privacy, or a full professional workspace toolkit.</p>
+  <div class="plans">
+    <div class="plan">
+      <h4>PhantomCloak Core</h4>
+      <div class="price">$4.99<small> /mo, billed yearly</small></div>
+      <div class="section-note" style="text-align:left;margin:0">$11.99 month-to-month</div>
+      <ul>
+        <li>WireGuard &amp; AES-256, post-quantum option</li>
+        <li>No-logs by architecture — processing on-device</li>
+        <li>Verified-before-send kill switch</li>
+        <li>DNS / IPv6 / WebRTC leak protection</li>
+        <li>Ad, tracker &amp; malware blocking</li>
+        <li>Split tunneling &amp; auto-connect on untrusted Wi-Fi</li>
+        <li>One-tap purpose profiles</li>
+        <li>Unlimited devices</li>
+      </ul>
+      <a class="btn" href="#" data-plan="core">Start with Core</a>
+    </div>
+    <div class="plan pro">
+      <h4>PhantomCloak Pro</h4>
+      <div class="price">$39<small> /mo</small></div>
+      <div class="section-note" style="text-align:left;margin:0">$29/mo billed yearly · everything in Core, plus the pro layer</div>
+      <ul>
+        <li>Everything in Core</li>
+        <li class="pro-only">Multi-hop routing &amp; Tor-over-VPN</li>
+        <li class="pro-only">Traffic obfuscation for restrictive networks</li>
+        <li class="pro-only">Dedicated &amp; residential IP options</li>
+        <li class="pro-only">Zero-config isolated workspaces</li>
+        <li class="pro-only">Continuous IP health check + auto-replace</li>
+        <li class="pro-only">Team seats &amp; exportable audit log</li>
+        <li class="pro-only">Full live telemetry command center</li>
+      </ul>
+      <a class="btn" href="#" data-plan="pro">Start with Pro</a>
+    </div>
+  </div>
+
+  <h2 class="section-title">Full comparison</h2>
+  <p class="section-note">Generated from the product’s feature tiers — the page and the app never drift.</p>
+  <table>
+    <tr><th>Capability</th><th class="c">Core</th><th class="c">Pro</th></tr>
+    <tr><td>WireGuard / AES-256 / post-quantum</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>No-logs, on-device processing</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Verified-before-send kill switch</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Leak protection (DNS/IPv6/WebRTC)</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Ad / tracker / malware blocking</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Split tunneling &amp; auto-connect</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Unlimited devices</td><td class="c yes">✓</td><td class="c yes">✓</td></tr>
+    <tr><td>Multi-hop &amp; Tor-over-VPN</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+    <tr><td>Traffic obfuscation</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+    <tr><td>Dedicated / residential IP</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+    <tr><td>Isolated workspaces</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+    <tr><td>IP health check + auto-replace</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+    <tr><td>Team seats &amp; audit log</td><td class="c no">—</td><td class="c yes">✓</td></tr>
+  </table>
+
+  <h2 class="section-title">Built to be trusted</h2>
+  <div class="trust">
+    <div class="card"><h3>On your device</h3><p>Obfuscation and routing run locally. There’s no central log of where you go because the architecture doesn’t create one.</p></div>
+    <div class="card"><h3>Open to audit</h3><p>We’re committed to publishing an independent security audit. Until it’s complete, we say so plainly rather than claiming a badge we haven’t earned.</p></div>
+    <div class="card"><h3>Plain-language policy</h3><p>Clear jurisdiction, clear data practices, no fine-print surprises. If we can’t see something, we tell you why.</p></div>
+  </div>
+
+  <footer>
+    <div class="brand" style="justify-content:center"><span class="dot"></span> PhantomCloak</div>
+    <p class="fine">PhantomCloak is a personal-privacy VPN. It is not sold for, and must not be used for, evading platform security, fraud/KYC systems, bans, or any unlawful activity. Feature availability may vary by platform. “Verified-before-send” blocks transmission when a protection check fails; no software can guarantee data can never leak under all conditions. Pricing shown for launch and subject to change before checkout.</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "log": { "level": "warn" },
+  "inbounds": [
+    {
+      "type": "vless",
+      "listen": "::",
+      "listen_port": 443,
+      "users": [{ "name": "delphi", "uuid": "REPLACE_UUID" }],
+      "tls": {
+        "enabled": true,
+        "server_name": "www.spiegel.de",
+        "reality": {
+          "enabled": true,
+          "handshake": { "server": "www.spiegel.de", "server_port": 443 },
+          "private_key": "REPLACE_KEY",
+          "short_id": ["de2025"]
+        }
+      }
+    }
+  ],
+  "outbounds": [{ "type": "direct" }]
+}
